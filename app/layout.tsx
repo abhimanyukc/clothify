@@ -1,4 +1,5 @@
 //good place to add metadata like title,desc,icons and provider we need
+//adding reusable component like header footer , siteblob
 import "@/styles/globals.css"
 import { Metadata } from "next"
 
@@ -35,9 +36,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
+          <Providers>
           <div className="relative flex min-h-screen flex-col">
+            <SiteHeader />
+            <SiteBlob />
             <div className="flex-1">{children}</div>
+            <SiteFooter />
           </div>
+          </Providers>
         </body>
       </html>
     </>
