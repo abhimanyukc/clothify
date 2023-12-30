@@ -7,11 +7,26 @@ import { cn } from "@/lib/utils"
 import { ProductFilters } from "@/components/product-filters"
 import { ProductGrid } from "@/components/product-grid"
 import { ProductSort } from "@/components/product-sort"
+import { seedSanityData } from "@/lib/seed"
 
 interface Props {}
 
-export default function Page() {
-  return (
+export default async function Page() {
+   const products =  await client.fetch<SanityProduct[]>(
+    groq`*[_type == "product"] {
+        _id,
+        _createdAt,
+        name,
+        sku,
+        images,
+        currency,
+        price,
+        description,
+        "slug": slug.current
+   }`
+   )
+    console.log(products)
+    return (
     <div>
       <div className="px-4 pt-20 text-center">
         <h1 className="text-4xl font-extrabold tracking-normal">Name</h1>
