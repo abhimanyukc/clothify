@@ -25,7 +25,7 @@ export default async function Page() {
         "slug": slug.current
    }`
    )
-    console.log(products)
+
 
     return (
     <div>
@@ -54,7 +54,7 @@ export default async function Page() {
               <ProductFilters />
               </div>
               {/* Product grid */}
-              <ProductGrid />
+              <ProductGrid products={products}/>
             </div>
           </section>
         </main>
