@@ -16,6 +16,7 @@ interface Props {
     color?: string
     category?: string
     size?: string
+    search?: string
   }
 }
 
@@ -23,7 +24,7 @@ export default async function Page({ searchParams}: Props) {
   // console.log(props)
   //we do want to provide a default value  for date of descending
   
-  const {date = "desc", price, color, category, size} = searchParams
+  const {date = "desc", price, color, category, size, search} = searchParams
   const priceOrder = price ? `| order(price ${price})` : ""
   const dateOrder =  date ? `| order(_createdAt ${date})` : ""
   const order = `${priceOrder}${dateOrder}`
@@ -31,8 +32,9 @@ export default async function Page({ searchParams}: Props) {
   const colorFilter = color ? `&& "${color}" in colors` : ""
   const categoryFilter = category ? `&& "${category}" in categories` : ""
   const sizeFilter = size ? `&& "${size}" in sizes` : ""
-   const filter = `*[${productFilter}${colorFilter}${categoryFilter}${sizeFilter}]`
-   
+  const searchFilter = search ? `&& name match "${search}"` : ""
+   const filter = `*[${productFilter}${colorFilter}${categoryFilter}${sizeFilter}${searchFilter}]`
+
    const products =  await client.fetch<SanityProduct[]>(
     groq`${filter}  ${order} {
         _id,
