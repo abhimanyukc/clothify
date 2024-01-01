@@ -15,6 +15,8 @@ interface Props {
 }
 
 export function ProductInfo({product}: Props) {
+   const [selectedSize, setSelectedSize] = useState(product.sizes[0])
+
   function addToCart() {}
 
   return (
@@ -34,10 +36,12 @@ export function ProductInfo({product}: Props) {
 
       <div className="mt-4">
         <p>
-          Size: <strong>{getSizeName(product.sizes[0])}</strong>
+          Size: <strong>{getSizeName(selectedSize)}</strong>
         </p>
         {product.sizes.map((size) => (
-          <Button key={size} variant="default" className="mr-2 mt-4">
+          <Button onClick={() => setSelectedSize(size)} key={size} 
+          variant={selectedSize === size ? "default" : "outline"}
+          className="mr-2 mt-4">
             {getSizeName(size)}
           </Button>
         ))}
