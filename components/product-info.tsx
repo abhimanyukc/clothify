@@ -74,7 +74,7 @@ export function ProductInfo({product}: Props) {
         <div className="mt-4 flex">
           <Button
             type="button"
-            onClick={addItem}
+            onClick={addToCart}
             className="w-full bg-violet-600 py-6 text-base font-medium text-white hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500"
           >
             Add to cart
